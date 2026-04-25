@@ -1,0 +1,1579 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منصة الخطة المالية ونموذج العمل التجاري المتكاملة – جامعة ابن خلدون تيارت</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+        :root {
+            --navy: #0a1f3c;
+            --navy-mid: #112d4e;
+            --navy-light: #1a4068;
+            --gold: #c9a84c;
+            --gold-light: #e8c97a;
+            --gold-pale: #fdf6e3;
+            --teal: #1a8a8a;
+            --teal-light: #e8f7f7;
+            --red-accent: #c0392b;
+            --green: #1a7a4a;
+            --green-light: #e8f5ee;
+            --text-dark: #0a1f3c;
+            --text-mid: #2c4a6e;
+            --text-light: #6b8caf;
+            --bg: #f0f4f8;
+            --bg-card: #ffffff;
+            --border: #dde8f0;
+            --shadow-sm: 0 2px 8px rgba(10,31,60,0.08);
+            --shadow-md: 0 8px 24px rgba(10,31,60,0.12);
+            --shadow-lg: 0 16px 48px rgba(10,31,60,0.15);
+            --radius: 20px;
+            --radius-sm: 12px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background: var(--bg);
+            color: var(--text-dark);
+            min-height: 100vh;
+        }
+
+        /* ===== HEADER ===== */
+        .uni-header {
+            background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 50%, var(--navy-light) 100%);
+            padding: 0;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .uni-header::before {
+            content: '';
+            position: absolute;
+            top: -60px; left: -60px;
+            width: 300px; height: 300px;
+            background: rgba(201,168,76,0.08);
+            border-radius: 50%;
+        }
+
+        .uni-header::after {
+            content: '';
+            position: absolute;
+            bottom: -40px; right: -40px;
+            width: 200px; height: 200px;
+            background: rgba(201,168,76,0.06);
+            border-radius: 50%;
+        }
+
+        .header-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 40px;
+            position: relative;
+            z-index: 2;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .logo-box {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            background: rgba(255,255,255,0.07);
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 60px;
+            padding: 10px 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .logo-box img {
+            width: 56px;
+            height: 56px;
+            object-fit: contain;
+            filter: drop-shadow(0 2px 8px rgba(0,0,0,0.3));
+        }
+
+        .logo-box-text { color: white; }
+        .logo-box-text strong { font-size: 0.78rem; font-weight: 700; display: block; color: var(--gold-light); }
+        .logo-box-text span { font-size: 0.68rem; opacity: 0.75; }
+
+        .header-center {
+            text-align: center;
+            flex: 1;
+            padding: 0 30px;
+        }
+
+        .header-center h1 {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: #fff;
+            letter-spacing: -0.5px;
+            line-height: 1.2;
+        }
+
+        .header-center h1 span { color: var(--gold-light); }
+
+        .header-center .subtitle {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(90deg, var(--gold), var(--gold-light));
+            color: var(--navy);
+            font-weight: 800;
+            font-size: 0.85rem;
+            padding: 6px 24px;
+            border-radius: 40px;
+            margin-top: 10px;
+        }
+
+        .header-bottom {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            padding: 12px 40px 16px;
+            position: relative;
+            z-index: 2;
+            flex-wrap: wrap;
+        }
+
+        .header-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: rgba(255,255,255,0.85);
+            font-size: 0.75rem;
+            padding: 5px 14px;
+            border-radius: 30px;
+        }
+
+        .header-badge i { color: var(--gold-light); font-size: 0.7rem; }
+
+        /* ===== DESIGNER CARD ===== */
+        .designer-card {
+            background: var(--bg-card);
+            margin: 28px 30px;
+            border-radius: var(--radius);
+            padding: 20px 28px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            flex-wrap: wrap;
+            box-shadow: var(--shadow-md);
+            border-right: 5px solid var(--gold);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .designer-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 4px;
+            background: linear-gradient(90deg, var(--navy), var(--gold), var(--navy));
+        }
+
+        .designer-info {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .designer-avatar {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 3px solid var(--gold);
+            box-shadow: 0 4px 16px rgba(201,168,76,0.3);
+            background: var(--navy);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .designer-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .designer-avatar-fallback {
+            font-size: 32px;
+            color: var(--gold-light);
+        }
+
+        .designer-meta strong {
+            display: block;
+            font-size: 1.05rem;
+            font-weight: 800;
+            color: var(--navy);
+        }
+
+        .designer-meta span {
+            font-size: 0.82rem;
+            color: var(--text-light);
+        }
+
+        .designer-meta .role-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            background: var(--teal-light);
+            color: var(--teal);
+            font-size: 0.73rem;
+            font-weight: 700;
+            padding: 3px 12px;
+            border-radius: 20px;
+            margin-top: 5px;
+        }
+
+        .designer-quote {
+            background: linear-gradient(135deg, var(--gold-pale), #fff8e8);
+            border: 1px solid var(--gold-light);
+            border-radius: var(--radius-sm);
+            padding: 12px 20px;
+            color: #7a5c00;
+            font-size: 0.83rem;
+            font-weight: 600;
+            max-width: 380px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            line-height: 1.5;
+        }
+
+        .designer-quote i { color: var(--gold); font-size: 1rem; flex-shrink: 0; margin-top: 2px; }
+
+        /* ===== MAIN LAYOUT ===== */
+        .main-wrapper {
+            padding: 0 30px 50px;
+        }
+
+        .section-label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--text-light);
+            letter-spacing: 1px;
+            margin-bottom: 16px;
+        }
+
+        .section-label::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border);
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 420px 1fr;
+            gap: 24px;
+        }
+
+        /* ===== CARDS ===== */
+        .card {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border);
+            overflow: hidden;
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 18px 24px;
+            border-bottom: 1px solid var(--border);
+            background: linear-gradient(135deg, var(--navy), var(--navy-mid));
+        }
+
+        .card-header-icon {
+            width: 38px;
+            height: 38px;
+            background: rgba(201,168,76,0.2);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gold-light);
+            font-size: 1rem;
+            flex-shrink: 0;
+        }
+
+        .card-header h3 {
+            font-size: 1rem;
+            font-weight: 800;
+            color: #fff;
+            flex: 1;
+        }
+
+        .card-body {
+            padding: 22px 24px;
+        }
+
+        .full-width { grid-column: 1 / -1; }
+
+        /* ===== FORM ===== */
+        .form-group { margin-bottom: 16px; }
+
+        .form-group label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--text-mid);
+            margin-bottom: 6px;
+        }
+
+        .form-group label i {
+            color: var(--gold);
+            width: 16px;
+            text-align: center;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px 14px;
+            border-radius: 10px;
+            border: 1.5px solid var(--border);
+            background: #f8fafc;
+            font-family: 'Tajawal', sans-serif;
+            font-size: 0.88rem;
+            color: var(--text-dark);
+            transition: border-color 0.2s, box-shadow 0.2s;
+            outline: none;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: var(--gold);
+            box-shadow: 0 0 0 3px rgba(201,168,76,0.15);
+            background: #fff;
+        }
+
+        .form-group textarea { border-radius: 10px; resize: vertical; min-height: 52px; }
+
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+
+        /* Checkboxes */
+        .checkbox-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 8px;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: #f0f4f8;
+            border: 1.5px solid var(--border);
+            border-radius: 8px;
+            padding: 7px 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 0.82rem;
+            font-weight: 600;
+        }
+
+        .checkbox-item:has(input:checked) {
+            background: var(--gold-pale);
+            border-color: var(--gold);
+            color: #7a5c00;
+        }
+
+        .checkbox-item input { accent-color: var(--gold); }
+
+        .form-note {
+            font-size: 0.73rem;
+            color: var(--text-light);
+            margin-top: 4px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        /* ===== LEGAL BOX ===== */
+        .legal-box {
+            background: linear-gradient(135deg, #f0f7ff, #e8f4ff);
+            border: 1px solid #c2d9f0;
+            border-right: 4px solid var(--navy-light);
+            border-radius: var(--radius-sm);
+            padding: 16px 18px;
+            margin-top: 16px;
+            font-size: 0.8rem;
+            line-height: 1.8;
+        }
+
+        .legal-box .legal-title {
+            font-weight: 800;
+            color: var(--navy);
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+
+        .legal-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            margin-bottom: 6px;
+            color: var(--text-mid);
+        }
+
+        .legal-item i { color: #27ae60; flex-shrink: 0; margin-top: 3px; font-size: 0.7rem; }
+        .legal-item strong { color: var(--navy); }
+
+        /* ===== METHOD BOX ===== */
+        .method-box {
+            background: #f8fafc;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 14px 16px;
+            margin-top: 16px;
+            font-size: 0.78rem;
+            line-height: 1.8;
+            color: var(--text-mid);
+        }
+
+        .method-box .method-title {
+            font-weight: 800;
+            color: var(--navy);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 8px;
+            font-size: 0.83rem;
+        }
+
+        .method-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 6px;
+            margin-bottom: 4px;
+        }
+
+        .method-item::before {
+            content: '•';
+            color: var(--gold);
+            font-weight: 900;
+            flex-shrink: 0;
+        }
+
+        /* ===== BUTTONS ===== */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 11px 22px;
+            border-radius: 10px;
+            font-family: 'Tajawal', sans-serif;
+            font-size: 0.88rem;
+            font-weight: 700;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s;
+        }
+
+        .btn-gold {
+            background: linear-gradient(135deg, var(--gold), var(--gold-light));
+            color: var(--navy);
+            box-shadow: 0 4px 12px rgba(201,168,76,0.3);
+        }
+
+        .btn-gold:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 16px rgba(201,168,76,0.4);
+        }
+
+        .btn-navy {
+            background: linear-gradient(135deg, var(--navy), var(--navy-light));
+            color: white;
+            box-shadow: 0 4px 12px rgba(10,31,60,0.2);
+        }
+
+        .btn-navy:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 16px rgba(10,31,60,0.3);
+        }
+
+        .btn-teal {
+            background: linear-gradient(135deg, var(--teal), #22a6a6);
+            color: white;
+            box-shadow: 0 4px 12px rgba(26,138,138,0.25);
+        }
+
+        .btn-teal:hover { transform: translateY(-1px); }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--border);
+            color: var(--text-mid);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--gold);
+            color: var(--navy);
+        }
+
+        .btn-group {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        /* ===== SCENARIO BADGE ===== */
+        .scenario-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 16px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .badge-optimistic {
+            background: #e8f5ee;
+            color: var(--green);
+            border: 1px solid #a8d8ba;
+        }
+
+        .badge-pessimistic {
+            background: #fff0f0;
+            color: var(--red-accent);
+            border: 1px solid #f5b5b0;
+        }
+
+        /* ===== TABLES ===== */
+        .table-wrapper {
+            overflow-x: auto;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border);
+            margin-bottom: 16px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.78rem;
+            min-width: 700px;
+        }
+
+        thead tr { background: linear-gradient(135deg, var(--navy), var(--navy-mid)); }
+        thead th {
+            color: white;
+            padding: 10px 8px;
+            font-weight: 700;
+            text-align: center;
+            white-space: nowrap;
+            font-size: 0.75rem;
+        }
+
+        tbody tr { transition: background 0.15s; }
+        tbody tr:nth-child(even) { background: #f8fafc; }
+        tbody tr:hover { background: #eef4fb; }
+        tbody td {
+            padding: 9px 8px;
+            text-align: center;
+            border-bottom: 1px solid var(--border);
+            color: var(--text-mid);
+        }
+
+        .td-profit { color: var(--green) !important; font-weight: 700; }
+        .td-year { font-weight: 800; color: var(--navy); }
+
+        .table-total {
+            background: linear-gradient(135deg, var(--gold-pale), #fff8e8);
+            border: 1px solid var(--gold-light);
+            border-radius: var(--radius-sm);
+            padding: 10px 16px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #7a5c00;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 8px;
+        }
+
+        /* ===== CHART ===== */
+        .chart-wrapper {
+            background: #f8fafc;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 16px;
+            margin-top: 16px;
+        }
+
+        .chart-title {
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--text-mid);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* ===== BMC GRID ===== */
+        .bmc-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+            margin-top: 8px;
+        }
+
+        .bmc-cell {
+            background: #f8fafc;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 14px;
+            transition: box-shadow 0.2s;
+        }
+
+        .bmc-cell:hover { box-shadow: var(--shadow-sm); }
+
+        .bmc-cell-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+
+        .bmc-cell-icon {
+            width: 28px;
+            height: 28px;
+            background: var(--navy);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gold-light);
+            font-size: 0.7rem;
+            flex-shrink: 0;
+        }
+
+        .bmc-cell-title {
+            font-size: 0.78rem;
+            font-weight: 800;
+            color: var(--navy);
+        }
+
+        .bmc-cell textarea {
+            width: 100%;
+            border: 1.5px solid var(--border);
+            border-radius: 8px;
+            padding: 8px 10px;
+            font-family: 'Tajawal', sans-serif;
+            font-size: 0.78rem;
+            color: var(--text-mid);
+            background: white;
+            resize: vertical;
+            min-height: 72px;
+            outline: none;
+        }
+
+        .bmc-cell textarea:focus {
+            border-color: var(--gold);
+            box-shadow: 0 0 0 2px rgba(201,168,76,0.12);
+        }
+
+        /* ===== BUSINESS PLAN ===== */
+        .bp-box {
+            background: #f8fafc;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 22px;
+            line-height: 2;
+            font-size: 0.85rem;
+            color: var(--text-mid);
+        }
+
+        .bp-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 8px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .bp-item:last-child { border-bottom: none; }
+
+        .bp-item-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--gold);
+            border-radius: 50%;
+            flex-shrink: 0;
+            margin-top: 8px;
+        }
+
+        .bp-item strong { color: var(--navy); }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: var(--navy);
+            color: rgba(255,255,255,0.6);
+            text-align: center;
+            padding: 20px;
+            font-size: 0.8rem;
+        }
+
+        footer strong { color: var(--gold-light); }
+
+        /* ===== DIVIDER ===== */
+        .divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--border), transparent);
+            margin: 20px 0;
+        }
+
+        /* ===== LOADING OVERLAY ===== */
+        #loadingOverlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(10,31,60,0.5);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(4px);
+        }
+
+        .loading-box {
+            background: white;
+            border-radius: var(--radius);
+            padding: 32px 48px;
+            text-align: center;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .loading-spinner {
+            width: 48px;
+            height: 48px;
+            border: 4px solid var(--border);
+            border-top-color: var(--gold);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: 0 auto 16px;
+        }
+
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        .loading-text {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--navy);
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1100px) {
+            .dashboard-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            .header-top { flex-direction: column; text-align: center; padding: 16px 20px; }
+            .header-center h1 { font-size: 1.3rem; }
+            .designer-card { flex-direction: column; align-items: flex-start; margin: 16px; }
+            .main-wrapper { padding: 0 16px 40px; }
+            .bmc-grid { grid-template-columns: 1fr; }
+            .grid-2, .grid-3 { grid-template-columns: 1fr; }
+            .logo-box-text { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Loading Overlay -->
+<div id="loadingOverlay">
+    <div class="loading-box">
+        <div class="loading-spinner"></div>
+        <div class="loading-text">جارٍ إنشاء ملف PDF الشامل...</div>
+        <div style="font-size:0.75rem;color:var(--text-light);margin-top:6px;">قد يستغرق ذلك بضع ثوانٍ</div>
+    </div>
+</div>
+
+<!-- ===== HEADER ===== -->
+<header class="uni-header">
+    <div class="header-top">
+        <!-- Logo Right -->
+        <div class="logo-box">
+            <img src="univ.jpeg" alt="شعار جامعة ابن خلدون"
+                onerror="this.onerror=null; this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <span style="display:none; font-size:2rem; color:var(--gold-light);"><i class="fas fa-university"></i></span>
+            <div class="logo-box-text">
+                <strong>جامعة ابن خلدون</strong>
+                <span>تيارت – الجزائر</span>
+            </div>
+        </div>
+
+        <!-- Center Title -->
+        <div class="header-center">
+            <h1>منصة <span>الخطة المالية</span> المتكاملة</h1>
+            <div class="subtitle">
+                <i class="fas fa-rocket" style="font-size:0.8rem;"></i>
+                حاضنة الأعمال الجامعية & مركز تطوير المقاولاتية "تيارت" – 2025-2026
+            </div>
+        </div>
+
+        <!-- Logo Left -->
+        <div class="logo-box">
+            <img src="univ.jpeg" alt="شعار جامعة ابن خلدون"
+                onerror="this.onerror=null; this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <span style="display:none; font-size:2rem; color:var(--gold-light);"><i class="fas fa-landmark"></i></span>
+            <div class="logo-box-text">
+                <strong>IBN KHALDOUN University</strong>
+                <span>Tiaret - ALGERIA</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-bottom">
+        <div class="header-badge"><i class="fas fa-check-circle"></i> IBS/IRG – الأمر 22-18</div>
+        <div class="header-badge"><i class="fas fa-check-circle"></i> IFU 5% – المادة 282</div>
+        <div class="header-badge"><i class="fas fa-check-circle"></i> TVA – 9% / 19%</div>
+        <div class="header-badge"><i class="fas fa-check-circle"></i> براءة الاختراع – مرسوم 21-300</div>
+        <div class="header-badge"><i class="fas fa-check-circle"></i> الجريدة الرسمية 2025-2026</div>
+    </div>
+</header>
+
+<!-- ===== DESIGNER SECTION ===== -->
+<div class="designer-card" style="margin: 24px 30px;">
+    <div class="designer-info">
+        <div class="designer-avatar">
+            <img src="aymen.jpeg" alt="أيمن"
+                onerror="this.onerror=null; this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="designer-avatar-fallback" style="display:none;">
+                <i class="fas fa-user-tie"></i>
+            </div>
+        </div>
+        <div class="designer-meta">
+            <strong>عمور المدعو زروق أيمن</strong>
+            <span>طالب ماستر 2 – مهندس الكتروميكانيك، صيانة صناعية</span>
+            <div class="role-badge"><i class="fas fa-code"></i> مطوّر المنصة</div>
+        </div>
+    </div>
+    <div class="designer-quote">
+        <i class="fas fa-quote-right"></i>
+        منصة ذكية ومتكاملة تعتمد أحدث الأطر القانونية والضريبية الجزائرية 2025-2026، صُممت لدعم ريادة الأعمال الجامعية ضمن القرار الوزاري رقم 008 المعدل و المتمم للقرار الوزاري رقم 1275
+    </div>
+</div>
+
+<!-- ===== MAIN CONTENT ===== -->
+<div class="main-wrapper">
+
+    <div class="section-label">
+        <i class="fas fa-layer-group" style="color:var(--gold);"></i>
+        لوحة التحكم الرئيسية
+    </div>
+
+    <div class="dashboard-grid">
+
+        <!-- ===== LEFT: FORM ===== -->
+        <div class="card">
+            <div class="card-header">
+                <div class="card-header-icon"><i class="fas fa-sliders-h"></i></div>
+                <h3>بيانات المشروع والمعطيات المالية</h3>
+            </div>
+            <div class="card-body">
+
+                <div class="form-group">
+                    <label><i class="fas fa-tag"></i> اسم المشروع / المنتج</label>
+                    <input type="text" id="projectName" value="  ">
+                </div>
+
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label><i class="fas fa-cube"></i> طبيعة المشروع</label>
+                        <select id="nature">
+                            <option value="produit">منتج مادي</option>
+                            <option value="digital" selected>منتج رقمي / برمجيات</option>
+                            <option value="service">خدمة احترافية</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-building"></i> الكيان القانوني</label>
+                        <select id="entity">
+                            <option value="startup" selected>مؤسسة ناشئة (Startup)</option>
+                            <option value="micro">مؤسسة مصغرة (Micro)</option>
+                            <option value="patent">براءة اختراع / مبتكر</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fas fa-tags"></i> نموذج التسعير</label>
+                    <div class="checkbox-group">
+                        <label class="checkbox-item">
+                            <input type="checkbox" id="priceUnit" checked> سعر وحدة ثابت
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" id="priceSub" checked> اشتراك سنوي
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" id="priceHybrid"> هجين (وحدة + اشتراك)
+                        </label>
+                    </div>
+                    <div class="form-note"><i class="fas fa-info-circle"></i> يُحسب الإيراد وفق النماذج المختارة مجتمعةً</div>
+                </div>
+
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label><i class="fas fa-coins"></i> سعر الوحدة (دج)</label>
+                        <input type="number" id="unitPrice" value="" min="0">
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-calendar-alt"></i> قيمة الاشتراك السنوي (دج)</label>
+                        <input type="number" id="subPrice" value="" min="0">
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-wrench"></i> التكلفة المتغيرة / وحدة (دج)</label>
+                        <input type="number" id="varCost" value="" min="0">
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-users"></i> الكمية / المشتركون (سنة 1)</label>
+                        <input type="number" id="baseQ" value="" min="1">
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-home"></i> التكاليف الثابتة / شهر (دج)</label>
+                        <input type="number" id="fixedMonthly" value="" min="0">
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-percent"></i> ضريبة TVA</label>
+                        <select id="tvaRate">
+                            <option value="19">19% – النسبة العامة</option>
+                            <option value="9">9% – خدمات رقمية (مخفضة)</option>
+                            <option value="0">0% – معفاة</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-chart-line"></i> النمو السنوي المتفائل (%)</label>
+                        <input type="number" id="optGrowth" value="" min="0" max="200">
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-chart-line" style="color:#c0392b;"></i> النمو السنوي المتشائم (%)</label>
+                        <input type="number" id="pesGrowth" value="" min="0" max="200">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fas fa-users"></i> شرائح العملاء المستهدفة</label>
+                    <textarea id="segments" rows="2">   </textarea>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-gem"></i> عرض القيمة الفريد (UVP)</label>
+                    <textarea id="valueProp" rows="2"></textarea>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-bullhorn"></i> قنوات التوزيع</label>
+                    <textarea id="channels" rows="2">      </textarea>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-handshake"></i> الشركاء الرئيسيون</label>
+                    <textarea id="partners" rows="2"></textarea>
+                </div>
+
+                <div class="btn-group" style="justify-content:flex-start; margin-top:16px;">
+                    <button class="btn btn-gold" id="refreshBtn">
+                        <i class="fas fa-sync-alt"></i> تحديث جميع الحسابات
+                    </button>
+                </div>
+
+                <!-- Legal Box -->
+                <div class="legal-box">
+                    <div class="legal-title"><i class="fas fa-gavel"></i> الإطار القانوني والضريبي – 2025/2026</div>
+                    <div class="legal-item">
+                        <i class="fas fa-check-circle"></i>
+                        <div><strong>المؤسسات الناشئة:</strong> إعفاء كلي من IBS/IRG لمدة 4 سنوات قابلة للتجديد (إجمالي 8 سنوات) – الأمر 22-18 / ق.م 2025</div>
+                    </div>
+                    <div class="legal-item">
+                        <i class="fas fa-check-circle"></i>
+                        <div><strong>المؤسسات المصغرة:</strong> ضريبة جزافية وحيدة IFU بنسبة 5% على رقم الأعمال – المادة 282 مكرر4</div>
+                    </div>
+                    <div class="legal-item">
+                        <i class="fas fa-check-circle"></i>
+                        <div><strong>براءات الاختراع:</strong> إعفاء من IRG لمدة 5 سنوات – المرسوم التنفيذي 21-300</div>
+                    </div>
+                    <div class="legal-item">
+                        <i class="fas fa-check-circle"></i>
+                        <div><strong>ضريبة القيمة المضافة TVA:</strong> 19% عامة | 9% مخفضة للخدمات الرقمية | 0% معفاة</div>
+                    </div>
+                    <div class="legal-item">
+                        <i class="fas fa-check-circle"></i>
+                        <div><strong>ق.م التكميلي 2026:</strong> الجريدة الرسمية رقم 78 – نوفمبر 2025</div>
+                    </div>
+                </div>
+
+                <!-- Method Box -->
+                <div class="method-box">
+                    <div class="method-title"><i class="fas fa-calculator"></i> منهجية الاحتساب المالي</div>
+                    <div class="method-item">رقم الأعمال = (الكمية × سعر الوحدة) + (اشتراك سنوي إن وُجد)</div>
+                    <div class="method-item">الهامش الإجمالي = رقم الأعمال − (الكمية × التكلفة المتغيرة)</div>
+                    <div class="method-item">EBIT = الهامش الإجمالي − التكاليف الثابتة السنوية (شهري × 12)</div>
+                    <div class="method-item">الضريبة: IBS 25% | IFU 5% على رقم الأعمال | إعفاء حسب الكيان والسنة</div>
+                    <div class="method-item">صافي الربح = EBIT − الضريبة المطبّقة</div>
+                    <div class="method-item">TVA = رقم الأعمال × النسبة المختارة (19% / 9% / 0%)</div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ===== RIGHT: FINANCIAL TABLES ===== -->
+        <div class="card">
+            <div class="card-header">
+                <div class="card-header-icon"><i class="fas fa-chart-bar"></i></div>
+                <h3>التوقعات المالية – 5 سنوات</h3>
+            </div>
+            <div class="card-body">
+                <div id="optimisticTable"></div>
+                <div class="divider"></div>
+                <div id="pessimisticTable"></div>
+
+                <div class="chart-wrapper">
+                    <div class="chart-title">
+                        <i class="fas fa-chart-area" style="color:var(--gold);"></i>
+                        منحنى تطور الهامش الإجمالي – سيناريو مقارن
+                    </div>
+                    <canvas id="profitChart" style="max-height: 220px;"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== BMC ===== -->
+        <div class="card full-width">
+            <div class="card-header">
+                <div class="card-header-icon"><i class="fas fa-th"></i></div>
+                <h3>نموذج العمل التجاري (Business Model Canvas)</h3>
+            </div>
+            <div class="card-body">
+                <div id="bmcContainer" class="bmc-grid"></div>
+                <div class="btn-group">
+                    <button class="btn btn-outline" id="resetBmcBtn">
+                        <i class="fas fa-undo-alt"></i> إعادة توليد BMC
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== BUSINESS PLAN ===== -->
+        <div class="card full-width">
+            <div class="card-header">
+                <div class="card-header-icon"><i class="fas fa-file-contract"></i></div>
+                <h3>خطة العمل الشاملة والمراجع القانونية</h3>
+            </div>
+            <div class="card-body">
+                <div id="bpSummary" class="bp-box"></div>
+                <div class="btn-group">
+                    <button class="btn btn-navy" id="downloadPdfBtn">
+                        <i class="fas fa-file-pdf"></i> تحميل الدراسة الكاملة PDF
+                    </button>
+                    <button class="btn btn-gold" id="copyBpBtn">
+                        <i class="fas fa-copy"></i> نسخ خطة العمل
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+    <strong><i class="fas fa-brain"></i> منصة الخطة المالية المتكاملة</strong> &nbsp;|&nbsp;
+    جامعة ابن خلدون تيارت – حاضنة الأعمال الجامعية - مركز تطوير المقاولاتية &nbsp;|&nbsp;
+    المطوّر: <strong>عمور المدعو زروق أيمن</strong> &nbsp;|&nbsp;
+    جميع الحسابات مُطابقة لقانون المالية الجزائري 2025-2026
+</footer>
+
+<script>
+(function () {
+
+    // ===== DOM ELEMENTS =====
+    const $ = id => document.getElementById(id);
+    const projectName    = $('projectName');
+    const nature         = $('nature');
+    const entity         = $('entity');
+    const unitPrice      = $('unitPrice');
+    const subPrice       = $('subPrice');
+    const varCost        = $('varCost');
+    const fixedMonthly   = $('fixedMonthly');
+    const baseQ          = $('baseQ');
+    const optGrowth      = $('optGrowth');
+    const pesGrowth      = $('pesGrowth');
+    const tvaRateSel     = $('tvaRate');
+    const segmentsInput  = $('segments');
+    const valuePropInput = $('valueProp');
+    const channelsInput  = $('channels');
+    const partnersInput  = $('partners');
+    const priceUnitCheck = $('priceUnit');
+    const priceSubCheck  = $('priceSub');
+    const priceHybridCheck = $('priceHybrid');
+
+    const optimisticDiv = $('optimisticTable');
+    const pessimisticDiv = $('pessimisticTable');
+    const bmcContainer  = $('bmcContainer');
+    const bpDiv         = $('bpSummary');
+    let profitChart     = null;
+
+    // ===== HELPERS =====
+    function fmt(n) { return Math.round(n).toLocaleString('fr-DZ'); }
+
+    function getQuantities(base, growthPct) {
+        let q = [base];
+        for (let i = 1; i < 5; i++) q.push(q[i - 1] * (1 + growthPct / 100));
+        return q;
+    }
+
+    // ===== REVENUE CALCULATION =====
+    // Revenue model: unit + subscription + hybrid (hybrid = unit + 50% subscription per client)
+    function calcRevenue(qty, unitP, subP, isUnit, isSub, isHybrid) {
+        let rev = 0;
+        if (isHybrid) {
+            rev = qty * unitP + qty * subP * 0.5;
+        } else {
+            if (isUnit) rev += qty * unitP;
+            if (isSub)  rev += qty * subP;
+            if (!isUnit && !isSub) rev += qty * unitP; // fallback
+        }
+        return rev;
+    }
+
+    // ===== TAX CALCULATION (Algerian Law) =====
+    // Startup: full exemption IBS/IRG years 1-6 (Order 22-18 + Finance Law 2025)
+    // Patent:  full exemption IRG years 1-5 (Decree 21-300)
+    // Micro:   IFU = 5% on revenue (Art. 282 bis4) – regardless of EBIT
+    // Others:  IBS = 25% on EBIT (if positive)
+    function calcTax(ebit, entityType, year, revenue) {
+        if (entityType === 'startup' && year <= 6) return 0;
+        if (entityType === 'patent'  && year <= 5) return 0;
+        if (entityType === 'micro') return revenue * 0.05;  // IFU on CA
+        if (ebit <= 0) return 0;
+        return ebit * 0.25;  // IBS
+    }
+
+    // TVA is a collected tax (not a cost), displayed for info
+    function calcTVA(revenue, rate) { return revenue * (rate / 100); }
+
+    // ===== BUILD FINANCIAL TABLE =====
+    function buildTable(quantities, label, growthVal, isOptimistic) {
+        const unitP  = parseFloat(unitPrice.value)    || 0;
+        const subP   = parseFloat(subPrice.value)     || 0;
+        const varC   = parseFloat(varCost.value)      || 0;
+        const fixedY = (parseFloat(fixedMonthly.value)|| 0) * 12;
+        const ent    = entity.value;
+        const tva    = parseFloat(tvaRateSel.value);
+        const isUnit = priceUnitCheck.checked;
+        const isSub  = priceSubCheck.checked;
+        const isHybrid = priceHybridCheck.checked;
+
+        let rows = '';
+        let totalNet = 0;
+        let marginsArr = [];
+
+        for (let i = 0; i < 5; i++) {
+            const year = i + 1;
+            const qty  = quantities[i];
+            const rev  = calcRevenue(qty, unitP, subP, isUnit, isSub, isHybrid);
+            const varTotal = qty * varC;
+            const grossMargin = rev - varTotal;
+            const ebit = grossMargin - fixedY;
+            const tax  = calcTax(ebit, ent, year, rev);
+            const tvaAmt = calcTVA(rev, tva);
+            const netP = ebit - tax;
+            totalNet += netP;
+            marginsArr.push(grossMargin);
+
+            // Tax label
+            let taxLabel = '';
+            if (ent === 'startup' && year <= 6) taxLabel = `<span style="color:#27ae60;font-size:0.7rem;">(إعفاء)</span>`;
+            else if (ent === 'patent' && year <= 5) taxLabel = `<span style="color:#27ae60;font-size:0.7rem;">(إعفاء)</span>`;
+            else if (ent === 'micro') taxLabel = `<span style="font-size:0.7rem;">(IFU 5%)</span>`;
+            else taxLabel = `<span style="font-size:0.7rem;">(IBS 25%)</span>`;
+
+            rows += `
+                <tr>
+                    <td class="td-year">${year}</td>
+                    <td>${fmt(qty)}</td>
+                    <td>${fmt(rev)} دج</td>
+                    <td>${fmt(varTotal)} دج</td>
+                    <td>${fmt(grossMargin)} دج</td>
+                    <td>${fmt(ebit)} دج</td>
+                    <td>${fmt(tax)} دج ${taxLabel}</td>
+                    <td>${fmt(tvaAmt)} دج</td>
+                    <td class="td-profit">${fmt(netP)} دج</td>
+                </tr>`;
+        }
+
+        const badgeClass = isOptimistic ? 'badge-optimistic' : 'badge-pessimistic';
+        const badgeIcon  = isOptimistic ? 'fa-arrow-trend-up' : 'fa-arrow-trend-down';
+
+        return `
+            <div class="scenario-badge ${badgeClass}">
+                <i class="fas ${badgeIcon}"></i> ${label} – نمو سنوي ${growthVal}%
+            </div>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>السنة</th>
+                            <th>الكمية/عملاء</th>
+                            <th>رقم الأعمال</th>
+                            <th>ت.متغيرة</th>
+                            <th>هامش إجمالي</th>
+                            <th>EBIT</th>
+                            <th>الضريبة</th>
+                            <th>TVA (مُحصَّلة)</th>
+                            <th>صافي الربح</th>
+                        </tr>
+                    </thead>
+                    <tbody>${rows}</tbody>
+                </table>
+            </div>
+            <div class="table-total">
+                <i class="fas fa-trophy" style="color:var(--gold);"></i>
+                إجمالي صافي الربح التراكمي (5 سنوات): <strong>${fmt(totalNet)} دج</strong>
+            </div>`;
+    }
+
+    // ===== FINANCIAL COMPUTATION =====
+    function computeFinancial() {
+        const base = parseFloat(baseQ.value) || 1;
+        const opt  = parseFloat(optGrowth.value) || 0;
+        const pes  = parseFloat(pesGrowth.value) || 0;
+
+        const optQ = getQuantities(base, opt);
+        const pesQ = getQuantities(base, pes);
+
+        optimisticDiv.innerHTML  = buildTable(optQ, 'سيناريو متفائل', opt, true);
+        pessimisticDiv.innerHTML = buildTable(pesQ, 'سيناريو متشائم', pes, false);
+
+        // Chart
+        const unitP = parseFloat(unitPrice.value) || 0;
+        const subP  = parseFloat(subPrice.value)  || 0;
+        const varC  = parseFloat(varCost.value)   || 0;
+        const isUnit = priceUnitCheck.checked;
+        const isSub  = priceSubCheck.checked;
+        const isHybrid = priceHybridCheck.checked;
+
+        const optMargins = optQ.map(q => calcRevenue(q, unitP, subP, isUnit, isSub, isHybrid) - q * varC);
+        const pesMargins = pesQ.map(q => calcRevenue(q, unitP, subP, isUnit, isSub, isHybrid) - q * varC);
+
+        if (profitChart) profitChart.destroy();
+        const ctx = $('profitChart').getContext('2d');
+        profitChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['سنة 1', 'سنة 2', 'سنة 3', 'سنة 4', 'سنة 5'],
+                datasets: [
+                    {
+                        label: 'هامش متفائل',
+                        data: optMargins,
+                        borderColor: '#c9a84c',
+                        backgroundColor: 'rgba(201,168,76,0.1)',
+                        borderWidth: 2.5,
+                        pointBackgroundColor: '#c9a84c',
+                        pointRadius: 4,
+                        fill: true,
+                        tension: 0.4
+                    },
+                    {
+                        label: 'هامش متشائم',
+                        data: pesMargins,
+                        borderColor: '#1a7a4a',
+                        backgroundColor: 'rgba(26,122,74,0.08)',
+                        borderWidth: 2,
+                        pointBackgroundColor: '#1a7a4a',
+                        pointRadius: 4,
+                        fill: true,
+                        tension: 0.4,
+                        borderDash: [5, 3]
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                plugins: {
+                    legend: { labels: { font: { family: 'Tajawal', size: 12 }, color: '#0a1f3c' } }
+                },
+                scales: {
+                    x: { ticks: { font: { family: 'Tajawal' }, color: '#6b8caf' } },
+                    y: {
+                        ticks: {
+                            font: { family: 'Tajawal' },
+                            color: '#6b8caf',
+                            callback: v => (v / 1e6).toFixed(1) + 'M'
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    // ===== BMC =====
+    function generateBMC() {
+        const proj    = projectName.value.trim() || 'المشروع';
+        const partners = partnersInput.value.trim()  || 'حاضنة الأعمال، وزارة اقتصاد المعرفة';
+        const segments = segmentsInput.value.trim()  || 'الشركات الكبرى';
+        const valueP   = valuePropInput.value.trim() || 'حل تكنولوجي مبتكر';
+        const channels = channelsInput.value.trim()  || 'فريق مبيعات، منصة رقمية';
+        const fixedY   = (parseFloat(fixedMonthly.value) || 0) * 12;
+        const varC     = parseFloat(varCost.value) || 0;
+
+        let revenueModel = [];
+        if (priceUnitCheck.checked)   revenueModel.push('بيع وحدات');
+        if (priceSubCheck.checked)    revenueModel.push('اشتراكات سنوية');
+        if (priceHybridCheck.checked) revenueModel.push('نموذج هجين');
+        if (!revenueModel.length)     revenueModel.push('بيع وحدات');
+
+        const cells = [
+            { icon: 'fa-handshake',    title: 'شراكات رئيسية',       text: partners },
+            { icon: 'fa-cogs',         title: 'أنشطة رئيسية',        text: `تطوير وبيع ${proj}، دعم تقني، تسويق B2B` },
+            { icon: 'fa-boxes',        title: 'موارد رئيسية',         text: 'فريق هندسي، رأس مال، براءة اختراع، خبرة جامعية' },
+            { icon: 'fa-gem',          title: 'عرض القيمة',           text: valueP },
+            { icon: 'fa-heart',        title: 'علاقة الزبائن',        text: 'علاقات شخصية، عقود متابعة، دعم فني مخصص' },
+            { icon: 'fa-users',        title: 'شرائح الزبائن',        text: segments },
+            { icon: 'fa-bullhorn',     title: 'قنوات التوزيع',        text: channels },
+            { icon: 'fa-coins',        title: 'مصادر الإيرادات',      text: revenueModel.join(' + ') },
+            { icon: 'fa-chart-line',   title: 'هيكل التكاليف',        text: `تكاليف ثابتة: ${fmt(fixedY)} دج/سنة\nتكلفة متغيرة: ${fmt(varC)} دج/وحدة` }
+        ];
+
+        bmcContainer.innerHTML = cells.map(c => `
+            <div class="bmc-cell">
+                <div class="bmc-cell-header">
+                    <div class="bmc-cell-icon"><i class="fas ${c.icon}"></i></div>
+                    <div class="bmc-cell-title">${c.title}</div>
+                </div>
+                <textarea rows="3">${c.text}</textarea>
+            </div>`).join('');
+    }
+
+    // ===== BUSINESS PLAN =====
+    function generateBP() {
+        const proj    = projectName.value.trim() || 'المشروع';
+        const entText = entity.options[entity.selectedIndex].text;
+        const natText = nature.options[nature.selectedIndex].text;
+        const tvaText = tvaRateSel.options[tvaRateSel.selectedIndex].text;
+
+        let exemptionDesc = '';
+        if (entity.value === 'startup')
+            exemptionDesc = 'إعفاء كلي من IBS/IRG لمدة 4 سنوات قابلة للتجديد (إجمالي 8 سنوات) – الأمر 22-18 وقانون المالية 2025.';
+        else if (entity.value === 'patent')
+            exemptionDesc = 'إعفاء من IRG لمدة 5 سنوات بموجب المرسوم التنفيذي 21-300.';
+        else
+            exemptionDesc = 'الضريبة الجزافية الوحيدة IFU بنسبة 5% على رقم الأعمال وفق المادة 282 مكرر4 (قانون المالية 2025).';
+
+        let pricingModel = [];
+        if (priceUnitCheck.checked)   pricingModel.push('سعر وحدة ثابت');
+        if (priceSubCheck.checked)    pricingModel.push('اشتراك سنوي');
+        if (priceHybridCheck.checked) pricingModel.push('نموذج هجين');
+
+        const items = [
+            { label: 'اسم المشروع', value: proj },
+            { label: 'طبيعة المشروع', value: natText },
+            { label: 'الكيان القانوني والحوافز الجبائية', value: `${entText} – ${exemptionDesc}` },
+            { label: 'نموذج التسعير المعتمد', value: pricingModel.join(' + ') || 'سعر وحدة ثابت' },
+            { label: 'ضريبة القيمة المضافة TVA', value: tvaText + ' (تُحصَّل من العملاء ولا تُعدّ تكلفة على المشروع)' },
+            { label: 'ملخص التوقعات المالية (5 سنوات)', value: 'تم احتساب رقم الأعمال، التكاليف المتغيرة والثابتة، الهامش الإجمالي، EBIT، الضريبة (مع الإعفاءات)، وصافي الربح في الجداول أعلاه وفق معادلات مالية دقيقة.' },
+            { label: 'نموذج العمل التجاري (BMC)', value: 'تم إنشاؤه آلياً بناءً على إجاباتك حول الشرائح، عرض القيمة، القنوات، والشركاء الرئيسيين.' },
+            { label: 'المراجع القانونية المعتمدة', value: 'قانون المالية 2025 (المادة 69 المعدلة) | الأمر 22-18 بتاريخ 27 جويلية 2022 (المؤسسات الناشئة) | قانون المالية التكميلي 2026 | الجريدة الرسمية رقم 78 – نوفمبر 2025 | المرسوم 21-300 (براءات الاختراع)' },
+            { label: 'تطبيق الإعفاءات الضريبية', value: 'تُطبَّق الإعفاءات آلياً في الجداول: 6 سنوات للمؤسسات الناشئة، 5 سنوات لبراءات الاختراع، و IFU 5% للمؤسسات المصغرة على رقم الأعمال.' },
+            { label: 'ملاحظات', value: 'جميع الجداول والرسوم البيانية تتحدث فورياً عند أي تعديل. يمكن تحرير مربعات نموذج BMC يدوياً.' }
+        ];
+
+        bpDiv.innerHTML = items.map(item => `
+            <div class="bp-item">
+                <div class="bp-item-dot"></div>
+                <div><strong>${item.label}:</strong> ${item.value}</div>
+            </div>`).join('');
+    }
+
+    // ===== REFRESH ALL =====
+    function refreshAll() {
+        computeFinancial();
+        generateBMC();
+        generateBP();
+    }
+
+    // ===== PDF EXPORT =====
+    async function downloadPDF() {
+        const overlay = $('loadingOverlay');
+        overlay.style.display = 'flex';
+
+        // Collect all BMC textarea values before cloning
+        const bmcTextareas = bmcContainer.querySelectorAll('textarea');
+        const bmcValues = Array.from(bmcTextareas).map(ta => ta.value);
+
+        try {
+            const { jsPDF } = window.jspdf;
+            const pdf = new jsPDF('p', 'mm', 'a4');
+            const pageW = 210, pageH = 297, margin = 10;
+
+            // Helper: render a DOM element to PDF page(s)
+            async function addSection(element) {
+                const canvas = await html2canvas(element, {
+                    scale: 2,
+                    useCORS: true,
+                    allowTaint: true,
+                    logging: false,
+                    backgroundColor: '#ffffff'
+                });
+                const imgData = canvas.toDataURL('image/png');
+                const imgW = pageW - margin * 2;
+                const imgH = (canvas.height * imgW) / canvas.width;
+                let y = margin;
+                let remaining = imgH;
+                let sourceY = 0;
+
+                while (remaining > 0) {
+                    const sliceH = Math.min(remaining, pageH - margin * 2);
+                    const sliceCanvas = document.createElement('canvas');
+                    sliceCanvas.width = canvas.width;
+                    sliceCanvas.height = (sliceH * canvas.width) / imgW;
+                    const ctx2 = sliceCanvas.getContext('2d');
+                    ctx2.drawImage(canvas, 0, sourceY * canvas.width / imgW, canvas.width, sliceCanvas.height, 0, 0, canvas.width, sliceCanvas.height);
+                    const sliceData = sliceCanvas.toDataURL('image/png');
+                    if (sourceY > 0) { pdf.addPage(); y = margin; }
+                    pdf.addImage(sliceData, 'PNG', margin, y, imgW, sliceH);
+                    sourceY += sliceH;
+                    remaining -= sliceH;
+                }
+            }
+
+            // Sections to render
+            // 1. Header clone
+            const headerEl = document.querySelector('.uni-header');
+            await addSection(headerEl);
+            pdf.addPage();
+
+            // 2. Designer card
+            const designerEl = document.querySelector('.designer-card');
+            await addSection(designerEl);
+            pdf.addPage();
+
+            // 3. Financial tables
+            const finEl = document.createElement('div');
+            finEl.style.cssText = 'background:white;padding:20px;direction:rtl;font-family:Tajawal,sans-serif;';
+            finEl.innerHTML = `<h2 style="color:#0a1f3c;font-size:1.1rem;margin-bottom:16px;border-bottom:2px solid #c9a84c;padding-bottom:8px;">التوقعات المالية – 5 سنوات (${projectName.value})</h2>` + optimisticDiv.innerHTML + pessimisticDiv.innerHTML;
+            document.body.appendChild(finEl);
+            await addSection(finEl);
+            document.body.removeChild(finEl);
+            pdf.addPage();
+
+            // 4. Chart
+            const chartEl = document.querySelector('.chart-wrapper');
+            await addSection(chartEl);
+            pdf.addPage();
+
+            // 5. BMC – replace textareas with divs
+            const bmcClone = bmcContainer.cloneNode(true);
+            const cloneTextareas = bmcClone.querySelectorAll('textarea');
+            cloneTextareas.forEach((ta, idx) => {
+                const div = document.createElement('div');
+                div.style.cssText = 'background:#f8fafc;padding:8px;border-radius:8px;font-size:0.78rem;line-height:1.6;white-space:pre-wrap;';
+                div.textContent = bmcValues[idx] || ta.value;
+                ta.parentNode.replaceChild(div, ta);
+            });
+            const bmcWrap = document.createElement('div');
+            bmcWrap.style.cssText = 'background:white;padding:20px;direction:rtl;font-family:Tajawal,sans-serif;';
+            bmcWrap.innerHTML = `<h2 style="color:#0a1f3c;font-size:1.1rem;margin-bottom:16px;border-bottom:2px solid #c9a84c;padding-bottom:8px;">نموذج العمل التجاري (BMC)</h2>`;
+            bmcWrap.appendChild(bmcClone);
+            document.body.appendChild(bmcWrap);
+            await addSection(bmcWrap);
+            document.body.removeChild(bmcWrap);
+            pdf.addPage();
+
+            // 6. Business Plan
+            const bpWrap = document.createElement('div');
+            bpWrap.style.cssText = 'background:white;padding:24px;direction:rtl;font-family:Tajawal,sans-serif;';
+            bpWrap.innerHTML = `<h2 style="color:#0a1f3c;font-size:1.1rem;margin-bottom:16px;border-bottom:2px solid #c9a84c;padding-bottom:8px;">خطة العمل الشاملة والمراجع القانونية</h2>` + bpDiv.innerHTML;
+            document.body.appendChild(bpWrap);
+            await addSection(bpWrap);
+            document.body.removeChild(bpWrap);
+
+            // Footer page
+            pdf.addPage();
+            pdf.setFont('helvetica');
+            pdf.setFontSize(11);
+            pdf.setTextColor(10, 31, 60);
+            pdf.text('جامعة ابن خلدون تيارت – حاضنة الأعمال الجامعية- مركز تطوير المقاولاتية', 105, 140, { align: 'center' });
+            pdf.setFontSize(9);
+            pdf.setTextColor(107, 140, 175);
+            pdf.text(`المشروع: ${projectName.value}`, 105, 155, { align: 'center' });
+            pdf.text('المطور: عمور أيمن – ماستر 2 مهندس إلكتروميكانيك', 105, 165, { align: 'center' });
+            pdf.text('جميع الحسابات مطابقة لقانون المالية الجزائري 2025-2026', 105, 175, { align: 'center' });
+
+            pdf.save(`دراسة_${projectName.value}_شاملة.pdf`);
+
+        } catch (err) {
+            alert('حدث خطأ أثناء إنشاء PDF:\n' + err.message + '\n\nيُرجى المحاولة مجدداً.');
+            console.error(err);
+        } finally {
+            overlay.style.display = 'none';
+        }
+    }
+
+    // ===== EVENT LISTENERS =====
+    const allInputs = [
+        projectName, nature, entity,
+        unitPrice, subPrice, varCost, fixedMonthly,
+        baseQ, optGrowth, pesGrowth, tvaRateSel,
+        segmentsInput, valuePropInput, channelsInput, partnersInput,
+        priceUnitCheck, priceSubCheck, priceHybridCheck
+    ];
+
+    allInputs.forEach(el => el.addEventListener('input', refreshAll));
+    $('refreshBtn').addEventListener('click', refreshAll);
+    $('resetBmcBtn').addEventListener('click', generateBMC);
+    $('downloadPdfBtn').addEventListener('click', downloadPDF);
+    $('copyBpBtn').addEventListener('click', () => {
+        const text = bpDiv.innerText;
+        navigator.clipboard.writeText(text)
+            .then(() => alert('✅ تم نسخ خطة العمل بنجاح'))
+            .catch(() => {
+                // Fallback
+                const ta = document.createElement('textarea');
+                ta.value = text;
+                document.body.appendChild(ta);
+                ta.select();
+                document.execCommand('copy');
+                document.body.removeChild(ta);
+                alert('✅ تم نسخ خطة العمل');
+            });
+    });
+
+    // ===== INIT =====
+    refreshAll();
+
+})();
+</script>
+</body>
+</html>
